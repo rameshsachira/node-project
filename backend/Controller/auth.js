@@ -71,14 +71,10 @@ exports.signup = async (req, res,) => {
         token.token +
         ".\n",
     };
-    transporter.sendMail(mailOptions, function (err) {
-      if (err) {
-        return res.status(500).send({ msg: err.message });
-      }
+    const emailRes = await transporter.sendMail(mailOptions); 
       res
         .status(200)
-        .send("A verification email has been sent");
-    });
+        .send("A verification email has been sent")
 
   } catch (error) {
     console.log(error.message);
